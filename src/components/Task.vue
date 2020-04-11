@@ -1,14 +1,13 @@
 <template>
   <div>
-    <form @submit.prevent="addTask">
       <span>{{title}}</span>
-      <input v-model="newTask" placeholder="Ingresa nuevas tareas">
-      <button type="submit">Añadir</button>
-    </form>
+      <input v-model="newTask" @keyup.enter="addTask" placeholder="Ingresa nuevas tareas">
+      <input @click="addTask" type="submit" value="Agregar">
 
     <ul>
       <li v-for="task in tasks" :key="task">
         {{task}}
+        <button @click="deleteTask(task)">Eliminar</button>
       </li>
     </ul>
   </div>
@@ -24,11 +23,16 @@ export default {
     }
   },
   methods: {
-      addTask(e) {
+      addTask() {
          this.tasks.push(this.newTask);
             // Limpiar input luego de agregar tarea
             this.newTask = '';
+      },
+
+      deleteTask(task) {
+        this.tasks.splice(this.tasks.indexOf(task), 1);
       }
+
     }
 }
 
