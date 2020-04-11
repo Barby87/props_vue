@@ -1,11 +1,11 @@
 <template>
   <div>
-      <span>{{title}}</span>
+      <!-- <span>{{title}}</span>
       <input v-model="newTask" @keyup.enter="addTask" placeholder="Ingresa nuevas tareas">
-      <input @click="addTask" type="submit" value="Agregar">
+      <input @click="addTask" type="submit" value="Agregar"> -->
 
     <ul>
-      <li v-for="task in tasks" :key="task">
+      <li>
         {{task}}
         <button @click="deleteTask(task)">Eliminar</button>
       </li>
@@ -15,20 +15,21 @@
 
 <script>
 export default {
-  data() {
-    return {
-      title: 'Tarea:',
-      tasks: [],
-      newTask: ''
-    }
-  },
-  methods: {
-      addTask() {
-         this.tasks.push(this.newTask);
-            // Limpiar input luego de agregar tarea
-            this.newTask = '';
-      },
+  name: 'Task',
+  props: {
+    task: String
+    },
 
+  // data() {
+  //   return {
+  //     title: 'Tarea:',
+  //     tasks: [],
+  //     newTask: ''
+  //   }
+  // },
+  
+  methods: {
+     
       deleteTask(task) {
         this.tasks.splice(this.tasks.indexOf(task), 1);
       }
